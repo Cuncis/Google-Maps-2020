@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "633690135806",
+    "firebase_url": "https://maps-and-directions-api-8a121.firebaseio.com",
+    "project_id": "maps-and-directions-api-8a121",
+    "storage_bucket": "maps-and-directions-api-8a121.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633690135806:android:4f9de34f08e94c61f819af",
+        "android_client_info": {
+          "package_name": "com.cuncis.googlemaps2020"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633690135806-b286g1rpptqojoj320hta1n4rftic8e9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZZfrmqYzBkNkRi6GUnWN7w1qRVyndj-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633690135806-b286g1rpptqojoj320hta1n4rftic8e9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
