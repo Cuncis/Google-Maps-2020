@@ -13,6 +13,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.cuncis.googlemaps2020.R;
+import com.cuncis.googlemaps2020.UserClient;
 import com.cuncis.googlemaps2020.models.User;
 import com.cuncis.googlemaps2020.models.UserLocation;
 import com.google.android.gms.common.ConnectionResult;
@@ -116,10 +117,13 @@ public class MainActivity extends AppCompatActivity implements
 
                         User user = task.getResult().toObject(User.class);
                         userLocation.setUser(user);
+                        ((UserClient)getApplicationContext()).setUser(user);
                         getLastLocation();
                     }
                 }
             });
+        } else {
+            getLastLocation();
         }
     }
 
