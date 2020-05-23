@@ -1,5 +1,6 @@
 package com.cuncis.googlemaps2020.ui;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -16,6 +17,7 @@ import com.cuncis.googlemaps2020.R;
 import com.cuncis.googlemaps2020.UserClient;
 import com.cuncis.googlemaps2020.models.User;
 import com.cuncis.googlemaps2020.models.UserLocation;
+import com.cuncis.googlemaps2020.services.LocationService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -102,6 +104,32 @@ public class MainActivity extends AppCompatActivity implements
         initChatroomRecyclerView();
     }
 
+    private void startLocationService(){
+        if(!isLocationServiceRunning()){
+            Intent serviceIntent = new Intent(this, LocationService.class);
+//        this.startService(serviceIntent);
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+
+                MainActivity.this.startForegroundService(serviceIntent);
+            }else{
+                startService(serviceIntent);
+            }
+        }
+    }
+
+    private boolean isLocationServiceRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)){
+            if("com.codingwithmitch.googledirectionstest.services.LocationService".equals(service.service.getClassName())) {
+                Log.d(TAG, "isLocationServiceRunning: location service is already running.");
+                return true;
+            }
+        }
+        Log.d(TAG, "isLocationServiceRunning: location service is not running.");
+        return false;
+    }
+
     private void getUserDetails() {
         if (userLocation == null) {
             userLocation = new UserLocation();
@@ -161,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements
                         userLocation.setGeo_point(geoPoint);
                         userLocation.setTimestamp(null);
                         saveUserLocation();
+                        startLocationService();
                     }
                 }
             }
